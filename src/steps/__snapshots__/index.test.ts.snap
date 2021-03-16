@@ -7,141 +7,700 @@ Object {
       "_class": Array [
         "Account",
       ],
-      "_key": "acme-unique-account-id",
+      "_key": "cobalt-account:local-integration-instance",
       "_rawData": Array [
         Object {
           "name": "default",
           "rawData": Object {
-            "id": "acme-unique-account-id",
-            "name": "Example Co. Acme Account",
+            "id": "Cobalt",
+            "name": "Cobalt Account",
           },
         },
       ],
-      "_type": "acme_account",
+      "_type": "cobalt_account",
       "createdOn": undefined,
-      "displayName": "Example Co. Acme Account",
-      "id": "acme-unique-account-id",
-      "manager": "Manager Name",
-      "mfaEnabled": true,
-      "name": "Example Co. Acme Account",
+      "displayName": "Cobalt - Local Integration",
+      "id": "Cobalt",
+      "name": "Cobalt - Local Integration",
     },
     Object {
       "_class": Array [
-        "User",
+        "Vendor",
       ],
-      "_key": "acme-user-1",
+      "_key": "cobalt-vendor",
       "_rawData": Array [
         Object {
           "name": "default",
           "rawData": Object {
-            "id": "acme-user-1",
-            "name": "User One",
+            "id": "Cobalt",
+            "name": "Cobalt Vendor",
           },
         },
       ],
-      "_type": "acme_user",
+      "_type": "cobalt_vendor",
+      "category": "security",
       "createdOn": undefined,
-      "displayName": "User One",
-      "email": "test@test.com",
-      "firstName": "John",
-      "id": "acme-user-1",
-      "name": "User One",
-      "username": "testusername",
+      "displayName": "Cobalt",
+      "id": "Cobalt",
+      "name": "Cobalt",
     },
     Object {
       "_class": Array [
-        "User",
+        "Service",
       ],
-      "_key": "acme-user-2",
+      "_key": "cobalt-pentest-service",
       "_rawData": Array [
         Object {
           "name": "default",
           "rawData": Object {
-            "id": "acme-user-2",
-            "name": "User Two",
+            "id": "Cobalt-pentest-service",
+            "name": "Cobalt pentest service",
           },
         },
       ],
-      "_type": "acme_user",
+      "_type": "cobalt_service",
+      "category": Array [
+        "security",
+      ],
       "createdOn": undefined,
-      "displayName": "User Two",
-      "email": "test@test.com",
-      "firstName": "John",
-      "id": "acme-user-2",
-      "name": "User Two",
-      "username": "testusername",
+      "displayName": "Cobalt pentest service",
+      "id": "Cobalt-pentest-service",
+      "name": "Cobalt pentest service",
     },
     Object {
       "_class": Array [
-        "UserGroup",
+        "Application",
       ],
-      "_key": "acme-group-1",
+      "_key": "as_9ctVo4X",
       "_rawData": Array [
         Object {
           "name": "default",
           "rawData": Object {
-            "id": "acme-group-1",
-            "name": "Group One",
-            "users": Array [
-              Object {
-                "id": "acme-user-1",
-              },
-            ],
+            "resource": Object {
+              "asset_type": "api",
+              "description": "",
+              "id": "as_9ctVo4X",
+              "title": "Test API Asset",
+            },
           },
         },
       ],
-      "_type": "acme_group",
+      "_type": "cobalt_asset",
+      "assetType": "api",
       "createdOn": undefined,
-      "displayName": "Group One",
-      "email": "testgroup@test.com",
-      "id": "acme-group-1",
-      "logoLink": "https://test.com/logo.png",
-      "name": "Group One",
+      "description": "",
+      "displayName": "Test API Asset",
+      "name": "Test API Asset",
+    },
+    Object {
+      "_class": Array [
+        "Application",
+      ],
+      "_key": "as_rPjSpXj",
+      "_rawData": Array [
+        Object {
+          "name": "default",
+          "rawData": Object {
+            "resource": Object {
+              "asset_type": "web",
+              "description": "First test Asset",
+              "id": "as_rPjSpXj",
+              "title": "Test Asset #1",
+            },
+          },
+        },
+      ],
+      "_type": "cobalt_asset",
+      "assetType": "web",
+      "createdOn": undefined,
+      "description": "First test Asset",
+      "displayName": "Test Asset #1",
+      "name": "Test Asset #1",
+    },
+    Object {
+      "_class": Array [
+        "Application",
+      ],
+      "_key": "as_HrZ74Uh",
+      "_rawData": Array [
+        Object {
+          "name": "default",
+          "rawData": Object {
+            "resource": Object {
+              "asset_type": "cloud_config",
+              "description": "",
+              "id": "as_HrZ74Uh",
+              "title": "Test Cloud Config",
+            },
+          },
+        },
+      ],
+      "_type": "cobalt_asset",
+      "assetType": "cloud_config",
+      "createdOn": undefined,
+      "description": "",
+      "displayName": "Test Cloud Config",
+      "name": "Test Cloud Config",
+    },
+    Object {
+      "_class": Array [
+        "Application",
+      ],
+      "_key": "as_ClGUrXE",
+      "_rawData": Array [
+        Object {
+          "name": "default",
+          "rawData": Object {
+            "resource": Object {
+              "asset_type": "web",
+              "description": "",
+              "id": "as_ClGUrXE",
+              "title": "Test Crazy Chars Asset @#$%@(~~\`\`",
+            },
+          },
+        },
+      ],
+      "_type": "cobalt_asset",
+      "assetType": "web",
+      "createdOn": undefined,
+      "description": "",
+      "displayName": "Test Crazy Chars Asset @#$%@(~~\`\`",
+      "name": "Test Crazy Chars Asset @#$%@(~~\`\`",
+    },
+    Object {
+      "_class": Array [
+        "Application",
+      ],
+      "_key": "as_Vw8HhoR",
+      "_rawData": Array [
+        Object {
+          "name": "default",
+          "rawData": Object {
+            "resource": Object {
+              "asset_type": "external_network",
+              "description": "",
+              "id": "as_Vw8HhoR",
+              "title": "Test External Network Asset",
+            },
+          },
+        },
+      ],
+      "_type": "cobalt_asset",
+      "assetType": "external_network",
+      "createdOn": undefined,
+      "description": "",
+      "displayName": "Test External Network Asset",
+      "name": "Test External Network Asset",
+    },
+    Object {
+      "_class": Array [
+        "Application",
+      ],
+      "_key": "as_O6qPyLc",
+      "_rawData": Array [
+        Object {
+          "name": "default",
+          "rawData": Object {
+            "resource": Object {
+              "asset_type": "internal_network",
+              "description": "",
+              "id": "as_O6qPyLc",
+              "title": "Test Internal Network Asset",
+            },
+          },
+        },
+      ],
+      "_type": "cobalt_asset",
+      "assetType": "internal_network",
+      "createdOn": undefined,
+      "description": "",
+      "displayName": "Test Internal Network Asset",
+      "name": "Test Internal Network Asset",
+    },
+    Object {
+      "_class": Array [
+        "Application",
+      ],
+      "_key": "as_KmzMiKh",
+      "_rawData": Array [
+        Object {
+          "name": "default",
+          "rawData": Object {
+            "resource": Object {
+              "asset_type": "mobile",
+              "description": "Some description of a  mobile asset",
+              "id": "as_KmzMiKh",
+              "title": "Test Mobile Asset",
+            },
+          },
+        },
+      ],
+      "_type": "cobalt_asset",
+      "assetType": "mobile",
+      "createdOn": undefined,
+      "description": "Some description of a  mobile asset",
+      "displayName": "Test Mobile Asset",
+      "name": "Test Mobile Asset",
+    },
+    Object {
+      "_class": Array [
+        "Application",
+      ],
+      "_key": "as_WFbWToK",
+      "_rawData": Array [
+        Object {
+          "name": "default",
+          "rawData": Object {
+            "resource": Object {
+              "asset_type": "web_plus_api",
+              "description": "",
+              "id": "as_WFbWToK",
+              "title": "Test Web+API Asset",
+            },
+          },
+        },
+      ],
+      "_type": "cobalt_asset",
+      "assetType": "web_plus_api",
+      "createdOn": undefined,
+      "description": "",
+      "displayName": "Test Web+API Asset",
+      "name": "Test Web+API Asset",
+    },
+    Object {
+      "_class": Array [
+        "Application",
+      ],
+      "_key": "as_m8KEIsR",
+      "_rawData": Array [
+        Object {
+          "name": "default",
+          "rawData": Object {
+            "resource": Object {
+              "asset_type": "web",
+              "description": "",
+              "id": "as_m8KEIsR",
+              "title": "Test Web Asset",
+            },
+          },
+        },
+      ],
+      "_type": "cobalt_asset",
+      "assetType": "web",
+      "createdOn": undefined,
+      "description": "",
+      "displayName": "Test Web Asset",
+      "name": "Test Web Asset",
+    },
+    Object {
+      "_class": Array [
+        "Application",
+      ],
+      "_key": "as_qpShMvk",
+      "_rawData": Array [
+        Object {
+          "name": "default",
+          "rawData": Object {
+            "resource": Object {
+              "asset_type": "web_plus_external_network",
+              "description": "",
+              "id": "as_qpShMvk",
+              "title": "Test Web + External Network Asset",
+            },
+          },
+        },
+      ],
+      "_type": "cobalt_asset",
+      "assetType": "web_plus_external_network",
+      "createdOn": undefined,
+      "description": "",
+      "displayName": "Test Web + External Network Asset",
+      "name": "Test Web + External Network Asset",
+    },
+    Object {
+      "_class": Array [
+        "Application",
+      ],
+      "_key": "as_MyGvYsm",
+      "_rawData": Array [
+        Object {
+          "name": "default",
+          "rawData": Object {
+            "resource": Object {
+              "asset_type": "web_plus_mobile",
+              "description": "
+Как вы сегодня 
+Test of non English chars
+
+كيف حالك اليوم",
+              "id": "as_MyGvYsm",
+              "title": "Test Web+Mobile Asset",
+            },
+          },
+        },
+      ],
+      "_type": "cobalt_asset",
+      "assetType": "web_plus_mobile",
+      "createdOn": undefined,
+      "description": "
+Как вы сегодня 
+Test of non English chars
+
+كيف حالك اليوم",
+      "displayName": "Test Web+Mobile Asset",
+      "name": "Test Web+Mobile Asset",
+    },
+    Object {
+      "_class": Array [
+        "Assessment",
+      ],
+      "_key": "pt_gm4lmL1",
+      "_rawData": Array [
+        Object {
+          "name": "default",
+          "rawData": Object {
+            "resource": Object {
+              "asset_id": null,
+              "end_date": "Feb 22 2021",
+              "id": "pt_gm4lmL1",
+              "methodology": null,
+              "objectives": "",
+              "platform_tags": Array [
+                "ReactJS",
+                "RoR",
+              ],
+              "start_date": "Feb 8 2021",
+              "state": "live",
+              "tag": "#PT5734",
+              "targets": Array [
+                "Cobalt.io",
+              ],
+              "title": "Test Asset #1 - February 2021",
+            },
+          },
+        },
+      ],
+      "_type": "cobalt_pentest",
+      "assetId": null,
+      "category": "Penetration Testing",
+      "createdOn": undefined,
+      "displayName": "Test Asset #1 - February 2021",
+      "endDate": "Feb 22 2021",
+      "internal": false,
+      "methodology": null,
+      "name": "Test Asset #1 - February 2021",
+      "objectives": "",
+      "platformTags": "[
+  \\"ReactJS\\",
+  \\"RoR\\"
+]",
+      "startDate": "Feb 8 2021",
+      "state": "live",
+      "summary": "Test Asset #1 - February 2021",
+      "tag": "#PT5734",
+      "targets": "[
+  \\"Cobalt.io\\"
+]",
+    },
+    Object {
+      "_class": Array [
+        "Finding",
+      ],
+      "_key": "vu_dJ749NP",
+      "_rawData": Array [
+        Object {
+          "name": "default",
+          "rawData": Object {
+            "resource": Object {
+              "affected_targets": Array [
+                "cobalt.io",
+              ],
+              "asset_id": "as_rPjSpXj",
+              "description": "Most security problems are weaknesses in an application that result from a broken or missing security control (authentication, access control, input validation, etc...). By contrast, business logic vulnerabilities are ways of using the legitimate processing flow of an application in a way that results in a negative consequence to the organization.
+",
+              "id": "vu_dJ749NP",
+              "impact": 1,
+              "labels": Array [],
+              "likelihood": 1,
+              "log": Array [],
+              "pentest_id": "pt_gm4lmL1",
+              "proof_of_concept": null,
+              "severity": "low",
+              "state": "need_fix",
+              "suggested_fix": "something",
+              "tag": "#PT5734_2",
+              "title": "Business logic",
+              "type_category": "Business Logic",
+            },
+          },
+        },
+      ],
+      "_type": "cobalt_finding",
+      "affectedTargets": "[
+  \\"cobalt.io\\"
+]",
+      "assetId": "as_rPjSpXj",
+      "category": "Penetration Testing",
+      "createdOn": undefined,
+      "description": "Most security problems are weaknesses in an application that result from a broken or missing security control (authentication, access control, input validation, etc...). By contrast, business logic vulnerabilities are ways of using the legitimate processing flow of an application in a way that results in a negative consequence to the organization.
+",
+      "displayName": "Business logic",
+      "impact": "1",
+      "labels": "[]",
+      "likelihood": 1,
+      "log": "[]",
+      "name": "Business logic",
+      "numericSeverity": 1,
+      "open": true,
+      "pentestId": "pt_gm4lmL1",
+      "prerequisites": undefined,
+      "proofOfConcept": null,
+      "severity": "1",
+      "state": "need_fix",
+      "suggestedFix": "something",
+      "tag": "#PT5734_2",
+      "typeCategory": "Business Logic",
+    },
+    Object {
+      "_class": Array [
+        "Finding",
+      ],
+      "_key": "vu_gIGDRPl",
+      "_rawData": Array [
+        Object {
+          "name": "default",
+          "rawData": Object {
+            "resource": Object {
+              "affected_targets": Array [
+                "Cobalt.io",
+              ],
+              "asset_id": "as_rPjSpXj",
+              "description": "Cross-Site Scripting (XSS) attacks are a type of injection, in which malicious scripts are injected into otherwise benign and trusted websites. XSS attacks occur when an attacker uses a web application to send malicious code, generally in the form of a browser side script, to a different end user. Flaws that allow these attacks to succeed are quite widespread and occur anywhere a web application uses input from a user within the output it generates without validating or encoding it.
+
+An attacker can use XSS to send a malicious script to an unsuspecting user. The end user’s browser has no way to know that the script should not be trusted, and will execute the script. Because it thinks the script came from a trusted source, the malicious script can access any cookies, session tokens, or other sensitive information retained by the browser and used with that site. These scripts can even rewrite the content of the HTML page.
+
+Stored attacks are those where the injected script is permanently stored on the target servers, such as in a database, in a message forum, visitor log, comment field, etc. The victim then retrieves the malicious script from the server when it requests the stored information. Stored XSS is also sometimes referred to as Persistent or Type-I XSS.
+
+",
+              "id": "vu_gIGDRPl",
+              "impact": 4,
+              "labels": Array [],
+              "likelihood": 4,
+              "log": Array [],
+              "pentest_id": "pt_gm4lmL1",
+              "proof_of_concept": null,
+              "severity": "high",
+              "state": "need_fix",
+              "suggested_fix": "1. Always treat all user input as untrusted data. 2. Never insert untrusted data except in allowed locations. 3. Always input or output-encode all data coming into or out of the application. 4. Always whitelist allowed characters and seldom use blacklisting of characters except in certain use cases. 5. Always use a well-known and security encoding API for input and output encoding such as the \`OWASP ESAPI\`. 6. Never try to write input and output encoders unless absolutely necessary. Chances are that someone has already written a good one. 7. Never use the DOM function \`innerHtml\` and instead use the functions \`innerText\` and \`textContent\` to prevent against DOM-based XSS. 8. As a best practice, consider using the \`HTTPOnly\` flag on cookies that are session tokens or sensitive tokens. 9. As a best practice, consider implementing \`Content Security Policy\` to protect against XSS and other injection type attacks. 10. As a best practice, consider using an auto-escaping templating system. 11. As a best practice, consider using the \`X-XSS-Protection\` response header.",
+              "tag": "#PT5734_1",
+              "title": "First findings",
+              "type_category": "Validation, Sanitization and Encoding",
+            },
+          },
+        },
+      ],
+      "_type": "cobalt_finding",
+      "affectedTargets": "[
+  \\"Cobalt.io\\"
+]",
+      "assetId": "as_rPjSpXj",
+      "category": "Penetration Testing",
+      "createdOn": undefined,
+      "description": "Cross-Site Scripting (XSS) attacks are a type of injection, in which malicious scripts are injected into otherwise benign and trusted websites. XSS attacks occur when an attacker uses a web application to send malicious code, generally in the form of a browser side script, to a different end user. Flaws that allow these attacks to succeed are quite widespread and occur anywhere a web application uses input from a user within the output it generates without validating or encoding it.
+
+An attacker can use XSS to send a malicious script to an unsuspecting user. The end user’s browser has no way to know that the script should not be trusted, and will execute the script. Because it thinks the script came from a trusted source, the malicious script can access any cookies, session tokens, or other sensitive information retained by the browser and used with that site. These scripts can even rewrite the content of the HTML page.
+
+Stored attacks are those where the injected script is permanently stored on the target servers, such as in a database, in a message forum, visitor log, comment field, etc. The victim then retrieves the malicious script from the server when it requests the stored information. Stored XSS is also sometimes referred to as Persistent or Type-I XSS.
+
+",
+      "displayName": "First findings",
+      "impact": "4",
+      "labels": "[]",
+      "likelihood": 4,
+      "log": "[]",
+      "name": "First findings",
+      "numericSeverity": 4,
+      "open": true,
+      "pentestId": "pt_gm4lmL1",
+      "prerequisites": undefined,
+      "proofOfConcept": null,
+      "severity": "4",
+      "state": "need_fix",
+      "suggestedFix": "1. Always treat all user input as untrusted data. 2. Never insert untrusted data except in allowed locations. 3. Always input or output-encode all data coming into or out of the application. 4. Always whitelist allowed characters and seldom use blacklisting of characters except in certain use cases. 5. Always use a well-known and security encoding API for input and output encoding such as the \`OWASP ESAPI\`. 6. Never try to write input and output encoders unless absolutely necessary. Chances are that someone has already written a good one. 7. Never use the DOM function \`innerHtml\` and instead use the functions \`innerText\` and \`textContent\` to prevent against DOM-based XSS. 8. As a best practice, consider using the \`HTTPOnly\` flag on cookies that are session tokens or sensitive tokens. 9. As a best practice, consider implementing \`Content Security Policy\` to protect against XSS and other injection type attacks. 10. As a best practice, consider using an auto-escaping templating system. 11. As a best practice, consider using the \`X-XSS-Protection\` response header.",
+      "tag": "#PT5734_1",
+      "typeCategory": "Validation, Sanitization and Encoding",
     },
   ],
   "collectedRelationships": Array [
     Object {
+      "_class": "PROVIDES",
+      "_fromEntityKey": "cobalt-vendor",
+      "_key": "cobalt-vendor|provides|cobalt-pentest-service",
+      "_toEntityKey": "cobalt-pentest-service",
+      "_type": "cobalt_vendor_provides_service",
+      "displayName": "PROVIDES",
+    },
+    Object {
       "_class": "HAS",
-      "_fromEntityKey": "acme-unique-account-id",
-      "_key": "acme-unique-account-id|has|acme-user-1",
-      "_toEntityKey": "acme-user-1",
-      "_type": "acme_account_has_user",
+      "_fromEntityKey": "cobalt-account:local-integration-instance",
+      "_key": "cobalt-account:local-integration-instance|has|cobalt-pentest-service",
+      "_toEntityKey": "cobalt-pentest-service",
+      "_type": "cobalt_account_has_service",
       "displayName": "HAS",
     },
     Object {
       "_class": "HAS",
-      "_fromEntityKey": "acme-unique-account-id",
-      "_key": "acme-unique-account-id|has|acme-user-2",
-      "_toEntityKey": "acme-user-2",
-      "_type": "acme_account_has_user",
+      "_fromEntityKey": "cobalt-account:local-integration-instance",
+      "_key": "cobalt-account:local-integration-instance|has|as_9ctVo4X",
+      "_toEntityKey": "as_9ctVo4X",
+      "_type": "cobalt_account_has_asset",
       "displayName": "HAS",
     },
     Object {
       "_class": "HAS",
-      "_fromEntityKey": "acme-unique-account-id",
-      "_key": "acme-unique-account-id|has|acme-group-1",
-      "_toEntityKey": "acme-group-1",
-      "_type": "acme_account_has_group",
+      "_fromEntityKey": "cobalt-account:local-integration-instance",
+      "_key": "cobalt-account:local-integration-instance|has|as_rPjSpXj",
+      "_toEntityKey": "as_rPjSpXj",
+      "_type": "cobalt_account_has_asset",
       "displayName": "HAS",
     },
     Object {
       "_class": "HAS",
-      "_fromEntityKey": "acme-group-1",
-      "_key": "acme-group-1|has|acme-user-1",
-      "_toEntityKey": "acme-user-1",
-      "_type": "acme_group_has_user",
+      "_fromEntityKey": "cobalt-account:local-integration-instance",
+      "_key": "cobalt-account:local-integration-instance|has|as_HrZ74Uh",
+      "_toEntityKey": "as_HrZ74Uh",
+      "_type": "cobalt_account_has_asset",
+      "displayName": "HAS",
+    },
+    Object {
+      "_class": "HAS",
+      "_fromEntityKey": "cobalt-account:local-integration-instance",
+      "_key": "cobalt-account:local-integration-instance|has|as_ClGUrXE",
+      "_toEntityKey": "as_ClGUrXE",
+      "_type": "cobalt_account_has_asset",
+      "displayName": "HAS",
+    },
+    Object {
+      "_class": "HAS",
+      "_fromEntityKey": "cobalt-account:local-integration-instance",
+      "_key": "cobalt-account:local-integration-instance|has|as_Vw8HhoR",
+      "_toEntityKey": "as_Vw8HhoR",
+      "_type": "cobalt_account_has_asset",
+      "displayName": "HAS",
+    },
+    Object {
+      "_class": "HAS",
+      "_fromEntityKey": "cobalt-account:local-integration-instance",
+      "_key": "cobalt-account:local-integration-instance|has|as_O6qPyLc",
+      "_toEntityKey": "as_O6qPyLc",
+      "_type": "cobalt_account_has_asset",
+      "displayName": "HAS",
+    },
+    Object {
+      "_class": "HAS",
+      "_fromEntityKey": "cobalt-account:local-integration-instance",
+      "_key": "cobalt-account:local-integration-instance|has|as_KmzMiKh",
+      "_toEntityKey": "as_KmzMiKh",
+      "_type": "cobalt_account_has_asset",
+      "displayName": "HAS",
+    },
+    Object {
+      "_class": "HAS",
+      "_fromEntityKey": "cobalt-account:local-integration-instance",
+      "_key": "cobalt-account:local-integration-instance|has|as_WFbWToK",
+      "_toEntityKey": "as_WFbWToK",
+      "_type": "cobalt_account_has_asset",
+      "displayName": "HAS",
+    },
+    Object {
+      "_class": "HAS",
+      "_fromEntityKey": "cobalt-account:local-integration-instance",
+      "_key": "cobalt-account:local-integration-instance|has|as_m8KEIsR",
+      "_toEntityKey": "as_m8KEIsR",
+      "_type": "cobalt_account_has_asset",
+      "displayName": "HAS",
+    },
+    Object {
+      "_class": "HAS",
+      "_fromEntityKey": "cobalt-account:local-integration-instance",
+      "_key": "cobalt-account:local-integration-instance|has|as_qpShMvk",
+      "_toEntityKey": "as_qpShMvk",
+      "_type": "cobalt_account_has_asset",
+      "displayName": "HAS",
+    },
+    Object {
+      "_class": "HAS",
+      "_fromEntityKey": "cobalt-account:local-integration-instance",
+      "_key": "cobalt-account:local-integration-instance|has|as_MyGvYsm",
+      "_toEntityKey": "as_MyGvYsm",
+      "_type": "cobalt_account_has_asset",
+      "displayName": "HAS",
+    },
+    Object {
+      "_class": "PERFORMED",
+      "_fromEntityKey": "cobalt-vendor",
+      "_key": "cobalt-vendor|performed|pt_gm4lmL1",
+      "_toEntityKey": "pt_gm4lmL1",
+      "_type": "cobalt_vendor_performed_pentest",
+      "displayName": "PERFORMED",
+    },
+    Object {
+      "_class": "PERFORMED",
+      "_fromEntityKey": "cobalt-pentest-service",
+      "_key": "cobalt-pentest-service|performed|pt_gm4lmL1",
+      "_toEntityKey": "pt_gm4lmL1",
+      "_type": "cobalt_service_performed_pentest",
+      "displayName": "PERFORMED",
+    },
+    Object {
+      "_class": "IDENTIFIED",
+      "_fromEntityKey": "pt_gm4lmL1",
+      "_key": "pt_gm4lmL1|identified|vu_dJ749NP",
+      "_toEntityKey": "vu_dJ749NP",
+      "_type": "cobalt_pentest_identified_finding",
+      "displayName": "IDENTIFIED",
+    },
+    Object {
+      "_class": "HAS",
+      "_fromEntityKey": "as_rPjSpXj",
+      "_key": "as_rPjSpXj|has|vu_dJ749NP",
+      "_toEntityKey": "vu_dJ749NP",
+      "_type": "cobalt_asset_has_finding",
+      "displayName": "HAS",
+    },
+    Object {
+      "_class": "IDENTIFIED",
+      "_fromEntityKey": "pt_gm4lmL1",
+      "_key": "pt_gm4lmL1|identified|vu_gIGDRPl",
+      "_toEntityKey": "vu_gIGDRPl",
+      "_type": "cobalt_pentest_identified_finding",
+      "displayName": "IDENTIFIED",
+    },
+    Object {
+      "_class": "HAS",
+      "_fromEntityKey": "as_rPjSpXj",
+      "_key": "as_rPjSpXj|has|vu_gIGDRPl",
+      "_toEntityKey": "vu_gIGDRPl",
+      "_type": "cobalt_asset_has_finding",
       "displayName": "HAS",
     },
   ],
   "encounteredTypes": Array [
-    "acme_account",
-    "acme_user",
-    "acme_account_has_user",
-    "acme_group",
-    "acme_account_has_group",
-    "acme_group_has_user",
+    "cobalt_account",
+    "cobalt_vendor",
+    "cobalt_service",
+    "cobalt_vendor_provides_service",
+    "cobalt_account_has_service",
+    "cobalt_asset",
+    "cobalt_account_has_asset",
+    "cobalt_pentest",
+    "cobalt_vendor_performed_pentest",
+    "cobalt_service_performed_pentest",
+    "cobalt_finding",
+    "cobalt_pentest_identified_finding",
+    "cobalt_asset_has_finding",
   ],
-  "numCollectedEntities": 4,
-  "numCollectedRelationships": 4,
+  "numCollectedEntities": 17,
+  "numCollectedRelationships": 19,
 }
 `;
