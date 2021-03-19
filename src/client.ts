@@ -13,17 +13,18 @@ type CobaltFinding = {
     title: string;
     description: string;
     type_category: string;
-    labels: object[];
-    impact: number;
-    likelihood: number;
-    state: string;
+    labels: object[]; // { name: string }
+    impact: number; //range 1 to 5
+    likelihood: number; // range 1 to 5
+    severity: string; //enum low,medium,high
+    state: string; //enum 'created', 'pending_fix', 'ready_for_re_test', 'accepted_risk', 'fixed', 'carried_over'
     affected_targets: string[];
     proof_of_concept: string;
     suggested_fix: string;
-    prerequisites: string;
+    prerequisites?: string;
     pentest_id: string;
     asset_id?: string;
-    log?: object[];
+    log?: object[]; // { action: string, timestamp: string}, values for action per 'state' field above
   };
 };
 
@@ -33,7 +34,7 @@ type CobaltAsset = {
     title: string;
     description: string;
     asset_type: string;
-    attachments?: object[];
+    attachments?: object[]; // { token: string, download_url: string }, refers to documents about asset
   };
 };
 
@@ -42,7 +43,7 @@ type CobaltPentest = {
     id: string;
     title: string;
     objectives: string;
-    state: string;
+    state: string; //enum 'new', 'in_review', 'live', 'paused', 'closed', 'cancelled', 'planned', 'remediation'
     tag: string;
     asset_id: string;
     platform_tags: string[];
@@ -59,8 +60,7 @@ type CobaltPentest = {
  */
 export class APIClient {
   orgToken: string;
-  constructor(readonly config: IntegrationConfig) {
-  }
+  constructor(readonly config: IntegrationConfig) {}
 
   getClient(): AxiosInstance {
     const client = axios.create({
@@ -91,7 +91,6 @@ export class APIClient {
   public async iterateFindings(
     iteratee: ResourceIteratee<CobaltFinding>,
   ): Promise<void> {
-
     const findings: CobaltFinding[] = await this.contactAPI(
       'https://api.cobalt.io/findings',
     );
@@ -109,7 +108,6 @@ export class APIClient {
   public async iteratePentests(
     iteratee: ResourceIteratee<CobaltPentest>,
   ): Promise<void> {
-
     const pentests: CobaltPentest[] = await this.contactAPI(
       'https://api.cobalt.io/pentests',
     );
@@ -127,7 +125,6 @@ export class APIClient {
   public async iterateAssets(
     iteratee: ResourceIteratee<CobaltAsset>,
   ): Promise<void> {
-
     const assets: CobaltAsset[] = await this.contactAPI(
       'https://api.cobalt.io/assets',
     );
@@ -139,7 +136,7 @@ export class APIClient {
 
   public async contactAPI(url, params?) {
     let reply;
-    if (!(this.orgToken)) {
+    if (!this.orgToken) {
       await this.updateOrgToken();
     }
     try {
