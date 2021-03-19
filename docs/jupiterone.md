@@ -96,7 +96,7 @@ The following relationships are created/mapped:
 | `cobalt_asset`        | **HAS**               | `cobalt_finding`       |
 | `cobalt_finding`      | **IS**                | `cobalt_vulnerability` |
 | `cobalt_pentest`      | **IDENTIFIED**        | `cobalt_finding`       |
-| `cobalt_pentest`      | **IDENTIFIED**        | `cobalt_finding`       |
+| `cobalt_pentest`      | **IDENTIFIED**        | `cobalt_vulnerability` |
 | `cobalt_service`      | **PERFORMED**         | `cobalt_pentest`       |
 | `cobalt_vendor`       | **PERFORMED**         | `cobalt_pentest`       |
 | `cobalt_vendor`       | **PROVIDES**          | `cobalt_service`       |
