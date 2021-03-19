@@ -12,15 +12,15 @@ Object {
         Object {
           "name": "default",
           "rawData": Object {
-            "id": "Cobalt",
-            "name": "Cobalt Account",
+            "id": "Cobalt - Local Integration",
+            "name": "Cobalt - Local Integration",
           },
         },
       ],
       "_type": "cobalt_account",
       "createdOn": undefined,
       "displayName": "Cobalt - Local Integration",
-      "id": "Cobalt",
+      "id": "Cobalt - Local Integration",
       "name": "Cobalt - Local Integration",
     },
     Object {
@@ -28,43 +28,25 @@ Object {
         "Vendor",
       ],
       "_key": "cobalt-vendor",
-      "_rawData": Array [
-        Object {
-          "name": "default",
-          "rawData": Object {
-            "id": "Cobalt",
-            "name": "Cobalt Vendor",
-          },
-        },
-      ],
+      "_rawData": Array [],
       "_type": "cobalt_vendor",
       "category": "security",
       "createdOn": undefined,
       "displayName": "Cobalt",
-      "id": "Cobalt",
       "name": "Cobalt",
     },
     Object {
       "_class": Array [
         "Service",
       ],
-      "_key": "cobalt-pentest-service",
-      "_rawData": Array [
-        Object {
-          "name": "default",
-          "rawData": Object {
-            "id": "Cobalt-pentest-service",
-            "name": "Cobalt pentest service",
-          },
-        },
-      ],
+      "_key": "cobalt-service",
+      "_rawData": Array [],
       "_type": "cobalt_service",
       "category": Array [
         "security",
       ],
       "createdOn": undefined,
       "displayName": "Cobalt pentest service",
-      "id": "Cobalt-pentest-service",
       "name": "Cobalt pentest service",
     },
     Object {
@@ -535,16 +517,16 @@ Stored attacks are those where the injected script is permanently stored on the 
     Object {
       "_class": "PROVIDES",
       "_fromEntityKey": "cobalt-vendor",
-      "_key": "cobalt-vendor|provides|cobalt-pentest-service",
-      "_toEntityKey": "cobalt-pentest-service",
+      "_key": "cobalt-vendor|provides|cobalt-service",
+      "_toEntityKey": "cobalt-service",
       "_type": "cobalt_vendor_provides_service",
       "displayName": "PROVIDES",
     },
     Object {
       "_class": "HAS",
       "_fromEntityKey": "cobalt-account:local-integration-instance",
-      "_key": "cobalt-account:local-integration-instance|has|cobalt-pentest-service",
-      "_toEntityKey": "cobalt-pentest-service",
+      "_key": "cobalt-account:local-integration-instance|has|cobalt-service",
+      "_toEntityKey": "cobalt-service",
       "_type": "cobalt_account_has_service",
       "displayName": "HAS",
     },
@@ -646,8 +628,8 @@ Stored attacks are those where the injected script is permanently stored on the 
     },
     Object {
       "_class": "PERFORMED",
-      "_fromEntityKey": "cobalt-pentest-service",
-      "_key": "cobalt-pentest-service|performed|pt_gm4lmL1",
+      "_fromEntityKey": "cobalt-service",
+      "_key": "cobalt-service|performed|pt_gm4lmL1",
       "_toEntityKey": "pt_gm4lmL1",
       "_type": "cobalt_service_performed_pentest",
       "displayName": "PERFORMED",

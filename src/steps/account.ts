@@ -7,7 +7,6 @@ import {
 } from '@jupiterone/integration-sdk-core';
 
 import { IntegrationConfig } from '../types';
-import { createAPIClient } from '../client';
 
 export const DATA_ACCOUNT_ENTITY = 'DATA_ACCOUNT_ENTITY';
 export const VENDOR_ENTITY_KEY = 'cobalt-vendor';
@@ -17,15 +16,9 @@ export async function fetchAccountDetails({
   jobState,
   instance,
 }: IntegrationStepExecutionContext<IntegrationConfig>) {
-  const name = `Cobalt - ${instance.name}`;
-  const apiClient = createAPIClient(instance.config);
-  const acctInfo = await apiClient.contactAPI('https://api.cobalt.io/orgs');
-  let acctId: string = name;
-  let acctName: string = name;
-  try {
-    acctId = acctInfo[0].resource.id;
-    acctName = acctInfo[0].resource.name;
-  } catch (err) {}
+  const name: string = `Cobalt - ${instance.name}`;
+  const acctId: string = name;
+  const acctName: string = name;
   const accountEntity = await jobState.addEntity(
     createIntegrationEntity({
       entityData: {
