@@ -58,17 +58,8 @@ type CobaltPentest = {
  * third party data APIs.
  */
 export class APIClient {
-  #orgToken: string;
+  orgToken: string;
   constructor(readonly config: IntegrationConfig) {
-    this.#orgToken = '';
-  }
-
-  getOrgToken(): string {
-    return this.#orgToken;
-  }
-
-  setOrgToken(orgToken: string) {
-    this.#orgToken = orgToken;
   }
 
   getClient(): AxiosInstance {
@@ -78,7 +69,7 @@ export class APIClient {
           client: 'JupiterOne-Cobalt Integration client',
           'Content-Type': 'application/json',
           Authorization: `Bearer ${this.config.apiKeyAuth}`,
-          'X-Org-Token': this.getOrgToken(),
+          'X-Org-Token': this.orgToken || '', //can't send undefined in HTTP
         },
       },
     });
@@ -148,7 +139,7 @@ export class APIClient {
 
   public async contactAPI(url, params?) {
     let reply;
-    if (this.getOrgToken() === '') {
+    if (this.orgToken === undefined) {
       await this.updateOrgToken();
     }
     try {
@@ -202,7 +193,7 @@ export class APIClient {
           statusText: `Received HTTP status ${tokenSearch.status} while trying to update token. Please check API_KEY_AUTH.`,
         });
       }
-      this.setOrgToken(tokenSearch.data.data[0].resource.token);
+      this.orgToken = tokenSearch.data.data[0].resource.token;
     } catch (err) {
       throw new IntegrationProviderAuthenticationError({
         cause: err,
