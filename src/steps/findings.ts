@@ -161,7 +161,7 @@ export const findingSteps: IntegrationStep<IntegrationConfig>[] = [
         _type: 'cobalt_pentest_identified_vulnerability',
         _class: RelationshipClass.IDENTIFIED,
         sourceType: 'cobalt_pentest',
-        targetType: 'cobalt_finding',
+        targetType: 'cobalt_vulnerability',
       },
       {
         _type: 'cobalt_finding_is_vulnerability',

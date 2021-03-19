@@ -139,7 +139,7 @@ export class APIClient {
 
   public async contactAPI(url, params?) {
     let reply;
-    if (this.orgToken === undefined) {
+    if (!(this.orgToken)) {
       await this.updateOrgToken();
     }
     try {
