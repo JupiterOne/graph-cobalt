@@ -8,7 +8,7 @@ import {
 
 import { IntegrationConfig } from '../types';
 import { createAPIClient } from '../client';
-import { webify } from '../util';
+import { webifyFromTitles } from '../util';
 
 export const DATA_ACCOUNT_ENTITY = 'DATA_ACCOUNT_ENTITY';
 export const VENDOR_ENTITY_KEY = 'cobalt-vendor';
@@ -34,7 +34,7 @@ export async function fetchAccountDetails({
             _class: 'Account',
             name: name,
             displayName: name,
-            webLink: `https://app.cobalt.io/${webify(orgProps.name)}`,
+            webLink: `https://app.cobalt.io/${webifyFromTitles(orgProps.name)}`,
           },
         },
       }),

@@ -40,7 +40,20 @@ export function getVulnerabilityNumber(link): string {
   return 'Unknown vulnerability';
 }
 
-export function webify(input): string {
-  //Todo - replace spaces with dashes, remove non url allowed chars
-  return 'stuff'; //input;
+export function webifyFromTitles(input): string {
+  //Cobalt urls are generated from a webification of titles of org or pentests
+  //in order to turn those titles into urls, we need to process the strings
+  //
+  //replace spaces with dashes, remove non url allowed chars
+  //regex notes:
+  // /\s/ means spaces, so .replace(/\s/g,'-') means replace all spaces with dashes, g=globally
+  // .replace(/-+/g,'-') means replaces 1+ dashes with a single dash
+  // .replace(/#+/g, '') is to strip any hashtags
+  const returnString = input
+    .trim()
+    .replace(/\s/g, '-')
+    .replace(/-+/g, '-')
+    .replace(/#+/g, '')
+    .toLowerCase();
+  return returnString;
 }
