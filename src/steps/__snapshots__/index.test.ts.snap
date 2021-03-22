@@ -23,7 +23,7 @@ Object {
       "createdOn": undefined,
       "displayName": "Cobalt - Local Integration",
       "name": "Cobalt - Local Integration",
-      "webLink": "https://app.cobalt.io/stuff",
+      "webLink": "https://app.cobalt.io/test-org-api",
     },
     Object {
       "_class": Array [
@@ -75,6 +75,7 @@ Object {
       "description": "",
       "displayName": "Test API Asset",
       "name": "Test API Asset",
+      "webLink": "https://app.cobalt.io/test-org-api/assets/as_9ctVo4X",
     },
     Object {
       "_class": Array [
@@ -100,6 +101,7 @@ Object {
       "description": "First test Asset",
       "displayName": "Test Asset #1",
       "name": "Test Asset #1",
+      "webLink": "https://app.cobalt.io/test-org-api/assets/as_rPjSpXj",
     },
     Object {
       "_class": Array [
@@ -125,6 +127,7 @@ Object {
       "description": "",
       "displayName": "Test Cloud Config",
       "name": "Test Cloud Config",
+      "webLink": "https://app.cobalt.io/test-org-api/assets/as_HrZ74Uh",
     },
     Object {
       "_class": Array [
@@ -150,6 +153,7 @@ Object {
       "description": "",
       "displayName": "Test Crazy Chars Asset @#$%@(~~\`\`",
       "name": "Test Crazy Chars Asset @#$%@(~~\`\`",
+      "webLink": "https://app.cobalt.io/test-org-api/assets/as_ClGUrXE",
     },
     Object {
       "_class": Array [
@@ -175,6 +179,7 @@ Object {
       "description": "",
       "displayName": "Test External Network Asset",
       "name": "Test External Network Asset",
+      "webLink": "https://app.cobalt.io/test-org-api/assets/as_Vw8HhoR",
     },
     Object {
       "_class": Array [
@@ -200,6 +205,7 @@ Object {
       "description": "",
       "displayName": "Test Internal Network Asset",
       "name": "Test Internal Network Asset",
+      "webLink": "https://app.cobalt.io/test-org-api/assets/as_O6qPyLc",
     },
     Object {
       "_class": Array [
@@ -225,6 +231,7 @@ Object {
       "description": "Some description of a  mobile asset",
       "displayName": "Test Mobile Asset",
       "name": "Test Mobile Asset",
+      "webLink": "https://app.cobalt.io/test-org-api/assets/as_KmzMiKh",
     },
     Object {
       "_class": Array [
@@ -250,6 +257,7 @@ Object {
       "description": "",
       "displayName": "Test Web+API Asset",
       "name": "Test Web+API Asset",
+      "webLink": "https://app.cobalt.io/test-org-api/assets/as_WFbWToK",
     },
     Object {
       "_class": Array [
@@ -275,6 +283,7 @@ Object {
       "description": "",
       "displayName": "Test Web Asset",
       "name": "Test Web Asset",
+      "webLink": "https://app.cobalt.io/test-org-api/assets/as_m8KEIsR",
     },
     Object {
       "_class": Array [
@@ -300,6 +309,7 @@ Object {
       "description": "",
       "displayName": "Test Web + External Network Asset",
       "name": "Test Web + External Network Asset",
+      "webLink": "https://app.cobalt.io/test-org-api/assets/as_qpShMvk",
     },
     Object {
       "_class": Array [
@@ -333,6 +343,7 @@ Test of non English chars
 كيف حالك اليوم",
       "displayName": "Test Web+Mobile Asset",
       "name": "Test Web+Mobile Asset",
+      "webLink": "https://app.cobalt.io/test-org-api/assets/as_MyGvYsm",
     },
     Object {
       "_class": Array [
@@ -385,6 +396,7 @@ Test of non English chars
       "targets": "[
   \\"Cobalt.io\\"
 ]",
+      "webLink": "https://app.cobalt.io/test-org-api/test-asset-1-february-2021-pt5734/brief",
     },
     Object {
       "_class": Array [
@@ -443,6 +455,7 @@ Test of non English chars
         "cobalt.io",
       ],
       "typeCategory": "Business Logic",
+      "webLink": "https://app.cobalt.io/test-org-api/test-asset-1-february-2021-pt5734/findings/2",
     },
     Object {
       "_class": Array [
@@ -511,6 +524,7 @@ Stored attacks are those where the injected script is permanently stored on the 
         "Cobalt.io",
       ],
       "typeCategory": "Validation, Sanitization and Encoding",
+      "webLink": "https://app.cobalt.io/test-org-api/test-asset-1-february-2021-pt5734/findings/1",
     },
   ],
   "collectedRelationships": Array [

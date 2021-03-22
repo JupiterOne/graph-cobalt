@@ -32,6 +32,13 @@ export async function fetchFindings({
         `Expected Assessment with key to exist (key=${findingProps.pentest_id}) as part of Finding (key=${findingProps.id})`,
       );
     }
+    const orgWebLink: string = `${assessmentEntity.webLink}`;
+    const lenToChop = 'brief'.length; //cut off the word brief from assessment (pentest) link
+    const findingNum = findingProps.tag.split('_')[1]; //example of finding.tag is #PT5734_1
+    const webLink = `${orgWebLink.substring(
+      0,
+      orgWebLink.length - lenToChop,
+    )}findings/${findingNum}`;
 
     const findingEntity = await jobState.addEntity(
       createIntegrationEntity({
@@ -44,6 +51,7 @@ export async function fetchFindings({
             tag: findingProps.tag,
             name: findingProps.title,
             displayName: findingProps.title,
+            webLink: webLink,
             description: findingProps.description,
             category: 'Penetration Testing',
             typeCategory: findingProps.type_category,
