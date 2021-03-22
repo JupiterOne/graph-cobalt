@@ -6,25 +6,11 @@ import { IntegrationConfig } from './types';
 
 export type ResourceIteratee<T> = (each: T) => Promise<void> | void;
 
-type CobaltFinding = {
+type CobaltOrg = {
   resource: {
     id: string;
-    tag: string;
-    title: string;
-    description: string;
-    type_category: string;
-    labels: object[]; // { name: string }
-    impact: number; //range 1 to 5
-    likelihood: number; // range 1 to 5
-    severity: string; //enum low,medium,high
-    state: string; //enum 'created', 'pending_fix', 'ready_for_re_test', 'accepted_risk', 'fixed', 'carried_over'
-    affected_targets: string[];
-    proof_of_concept: string;
-    suggested_fix: string;
-    prerequisites?: string;
-    pentest_id: string;
-    asset_id?: string;
-    log?: object[]; // { action: string, timestamp: string}, values for action per 'state' field above
+    name: string;
+    token: string;
   };
 };
 
@@ -51,6 +37,28 @@ type CobaltPentest = {
     targets: string[];
     start_date: string;
     end_date: string;
+  };
+};
+
+type CobaltFinding = {
+  resource: {
+    id: string;
+    tag: string;
+    title: string;
+    description: string;
+    type_category: string;
+    labels: object[]; // { name: string }
+    impact: number; //range 1 to 5
+    likelihood: number; // range 1 to 5
+    severity: string; //enum low,medium,high
+    state: string; //enum 'created', 'pending_fix', 'ready_for_re_test', 'accepted_risk', 'fixed', 'carried_over'
+    affected_targets: string[];
+    proof_of_concept: string;
+    suggested_fix: string;
+    prerequisites?: string;
+    pentest_id: string;
+    asset_id?: string;
+    log?: object[]; // { action: string, timestamp: string}, values for action per 'state' field above
   };
 };
 
@@ -81,6 +89,20 @@ export class APIClient {
     // authentication works with the provided credentials, throw an err if
     // authentication fails
     return await this.contactAPI('https://api.cobalt.io/orgs');
+  }
+
+  /**
+   * Add account info.
+   *
+   * @param iteratee receives the raw account info to produce entities/relationships
+   */
+  public async addAccount(
+    iteratee: ResourceIteratee<CobaltOrg>,
+  ): Promise<void> {
+    const orgs: CobaltOrg[] = await this.contactAPI(
+      'https://api.cobalt.io/orgs',
+    );
+    await iteratee(orgs[0]);
   }
 
   /**
