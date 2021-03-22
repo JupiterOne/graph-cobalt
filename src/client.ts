@@ -10,7 +10,7 @@ type CobaltOrg = {
   resource: {
     id: string;
     name: string;
-    token: string;
+    token?: string;
   };
 };
 

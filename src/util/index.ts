@@ -39,3 +39,8 @@ export function getVulnerabilityNumber(link): string {
   }
   return 'Unknown vulnerability';
 }
+
+export function webify(input): string {
+  //Todo - replace spaces with dashes, remove non url allowed chars
+  return 'stuff'; //input;
+}

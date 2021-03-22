@@ -7,6 +7,8 @@ import {
 } from '@jupiterone/integration-sdk-core';
 
 import { IntegrationConfig } from '../types';
+import { createAPIClient } from '../client';
+import { webify } from '../util';
 
 export const DATA_ACCOUNT_ENTITY = 'DATA_ACCOUNT_ENTITY';
 export const VENDOR_ENTITY_KEY = 'cobalt-vendor';
@@ -16,75 +18,77 @@ export async function fetchAccountDetails({
   jobState,
   instance,
 }: IntegrationStepExecutionContext<IntegrationConfig>) {
-  const name: string = `Cobalt - ${instance.name}`;
-  const acctId: string = name;
-  const acctName: string = name;
-  const accountEntity = await jobState.addEntity(
-    createIntegrationEntity({
-      entityData: {
-        source: {
-          id: acctId,
-          name: acctName,
-        },
-        assign: {
-          _key: `cobalt-account:${instance.id}`,
-          _type: 'cobalt_account',
-          _class: 'Account',
-          name: name,
-          displayName: name,
-        },
-      },
-    }),
-  );
-  await jobState.setData(DATA_ACCOUNT_ENTITY, accountEntity);
+  const apiClient = createAPIClient(instance.config);
 
-  const vendorEntity = await jobState.addEntity(
-    createIntegrationEntity({
-      entityData: {
-        source: {},
-        assign: {
-          _key: VENDOR_ENTITY_KEY,
-          _type: 'cobalt_vendor',
-          _class: 'Vendor',
-          name: 'Cobalt',
-          displayName: 'Cobalt',
-          category: 'security',
+  await apiClient.addAccount(async (org) => {
+    delete org.resource.token;
+    const orgProps = org.resource;
+    const name: string = `Cobalt - ${instance.name}`;
+    const accountEntity = await jobState.addEntity(
+      createIntegrationEntity({
+        entityData: {
+          source: org,
+          assign: {
+            _key: `cobalt-account:${instance.id}`,
+            _type: 'cobalt_account',
+            _class: 'Account',
+            name: name,
+            displayName: name,
+            webLink: `https://app.cobalt.io/${webify(orgProps.name)}`,
+          },
         },
-      },
-    }),
-  );
+      }),
+    );
+    await jobState.setData(DATA_ACCOUNT_ENTITY, accountEntity);
 
-  const serviceEntity = await jobState.addEntity(
-    createIntegrationEntity({
-      entityData: {
-        source: {},
-        assign: {
-          _key: SERVICE_ENTITY_KEY,
-          _type: 'cobalt_service',
-          _class: 'Service',
-          name: 'Cobalt pentest service',
-          displayName: 'Cobalt pentest service',
-          category: ['security'],
+    const vendorEntity = await jobState.addEntity(
+      createIntegrationEntity({
+        entityData: {
+          source: {},
+          assign: {
+            _key: VENDOR_ENTITY_KEY,
+            _type: 'cobalt_vendor',
+            _class: 'Vendor',
+            name: 'Cobalt',
+            displayName: 'Cobalt',
+            category: 'security',
+          },
         },
-      },
-    }),
-  );
+      }),
+    );
 
-  await jobState.addRelationship(
-    createDirectRelationship({
-      _class: RelationshipClass.PROVIDES,
-      from: vendorEntity,
-      to: serviceEntity,
-    }),
-  );
+    const serviceEntity = await jobState.addEntity(
+      createIntegrationEntity({
+        entityData: {
+          source: {},
+          assign: {
+            _key: SERVICE_ENTITY_KEY,
+            _type: 'cobalt_service',
+            _class: 'Service',
+            name: 'Cobalt pentest service',
+            displayName: 'Cobalt pentest service',
+            category: ['security'],
+          },
+        },
+      }),
+    );
 
-  await jobState.addRelationship(
-    createDirectRelationship({
-      _class: RelationshipClass.HAS,
-      from: accountEntity,
-      to: serviceEntity,
-    }),
-  );
+    await jobState.addRelationship(
+      createDirectRelationship({
+        _class: RelationshipClass.PROVIDES,
+        from: vendorEntity,
+        to: serviceEntity,
+      }),
+    );
+
+    await jobState.addRelationship(
+      createDirectRelationship({
+        _class: RelationshipClass.HAS,
+        from: accountEntity,
+        to: serviceEntity,
+      }),
+    );
+  });
 }
 
 export const accountSteps: IntegrationStep<IntegrationConfig>[] = [

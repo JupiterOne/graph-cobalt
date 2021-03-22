@@ -12,16 +12,18 @@ Object {
         Object {
           "name": "default",
           "rawData": Object {
-            "id": "Cobalt - Local Integration",
-            "name": "Cobalt - Local Integration",
+            "resource": Object {
+              "id": "3119",
+              "name": "TEST ORG - API",
+            },
           },
         },
       ],
       "_type": "cobalt_account",
       "createdOn": undefined,
       "displayName": "Cobalt - Local Integration",
-      "id": "Cobalt - Local Integration",
       "name": "Cobalt - Local Integration",
+      "webLink": "https://app.cobalt.io/stuff",
     },
     Object {
       "_class": Array [
