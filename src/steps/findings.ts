@@ -23,6 +23,16 @@ export async function fetchFindings({
     findingProps.state === 'fixed'
       ? (openBoolean = false)
       : (openBoolean = true);
+
+    // to derive the Finding webLink, we'll need pentest.weblink
+    //can't have a Finding without an Assessment (pentest)
+    const assessmentEntity = await jobState.findEntity(findingProps.pentest_id);
+    if (!assessmentEntity) {
+      throw new IntegrationMissingKeyError(
+        `Expected Assessment with key to exist (key=${findingProps.pentest_id}) as part of Finding (key=${findingProps.id})`,
+      );
+    }
+
     const findingEntity = await jobState.addEntity(
       createIntegrationEntity({
         entityData: {
@@ -44,29 +54,17 @@ export async function fetchFindings({
             likelihood: findingProps.likelihood,
             state: findingProps.state,
             open: openBoolean, //required property in J1 Finding
-            affectedTargets: JSON.stringify(
-              findingProps.affected_targets,
-              null,
-              2,
-            ),
+            targets: findingProps.affected_targets, //.targets has a global mapping in J1
             proofOfConcept: findingProps.proof_of_concept,
             suggestedFix: findingProps.suggested_fix,
             prerequisites: findingProps.prerequisites,
             pentestId: findingProps.pentest_id, //value of pentest Assessment _key
             assetId: findingProps.asset_id, // value of asset _key (which could be class Application or something else)
-            log: JSON.stringify(findingProps.log, null, 2),
           },
         },
       }),
     );
 
-    //can't have a Finding without an Assessment (pentest)
-    const assessmentEntity = await jobState.findEntity(findingProps.pentest_id);
-    if (!assessmentEntity) {
-      throw new IntegrationMissingKeyError(
-        `Expected Assessment with key to exist (key=${findingProps.pentest_id}) as part of Finding (key=${findingProps.id})`,
-      );
-    }
     await jobState.addRelationship(
       createDirectRelationship({
         _class: RelationshipClass.IDENTIFIED,
