@@ -24,6 +24,9 @@ export async function fetchAccountDetails({
     delete org.resource.token;
     const orgProps = org.resource;
     const name: string = `Cobalt - ${instance.name}`;
+    const webLink: string = `https://app.cobalt.io/${webifyFromTitles(
+      orgProps.name,
+    )}`;
     const accountEntity = await jobState.addEntity(
       createIntegrationEntity({
         entityData: {
@@ -34,7 +37,7 @@ export async function fetchAccountDetails({
             _class: 'Account',
             name: name,
             displayName: name,
-            webLink: `https://app.cobalt.io/${webifyFromTitles(orgProps.name)}`,
+            webLink: webLink,
           },
         },
       }),

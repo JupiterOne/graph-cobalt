@@ -20,6 +20,7 @@ export async function fetchAssets({
   await apiClient.iterateAssets(async (asset) => {
     delete asset.resource.attachments; //these have a uniquely generated AWS hash that triggers gitleaks
     const assetProps = asset.resource;
+    const webLink: string = `${accountEntity.webLink}/assets/${assetProps.id}`; //do NOT use webification on .id
     const classesAssigned: string[] = [];
     switch (assetProps.asset_type) {
       case 'Web':
@@ -66,6 +67,7 @@ export async function fetchAssets({
             displayName: assetProps.title,
             description: assetProps.description,
             assetType: assetProps.asset_type,
+            webLink: webLink,
           },
         },
       }),
