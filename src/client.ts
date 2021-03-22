@@ -158,45 +158,39 @@ export class APIClient {
 
   public async contactAPI(url, params?) {
     let reply;
+    let replyErrorDetected = false;
     if (!this.orgToken) {
       await this.updateOrgToken();
     }
     try {
       reply = await this.getClient().get(url, params);
-      if (reply.status !== 200) {
-        //maybe token expired
-        reply = await this.tryApiAgain(url, params);
-      }
     } catch (err) {
-      //maybe token expired
-      reply = await this.tryApiAgain(url, params);
+      replyErrorDetected = true;
     }
-    return reply.data.data;
-  }
-
-  public async tryApiAgain(url, params?) {
-    let reply;
-    try {
-      await this.updateOrgToken();
-      reply = await this.getClient().get(url, params);
-      if (reply.status !== 200) {
-        //we're getting a reply, but it's not a useful one
+    if (replyErrorDetected || reply.status !== 200) {
+      //maybe token expired
+      try {
+        await this.updateOrgToken();
+        reply = await this.getClient().get(url, params);
+      } catch (err) {
+        //something is really failing
         throw new IntegrationProviderAuthenticationError({
+          cause: err,
           endpoint: url,
-          status: reply.status,
-          statusText: `Received HTTP status ${reply.status} while fetching ${url}`,
+          status: err.response.status,
+          statusText: err.response,
         });
       }
-      return reply;
-    } catch (err) {
-      //no, something really blew up. Just throw a general error.
+    }
+    if (reply.status !== 200) {
+      //we're getting a reply, but it's not a useful one
       throw new IntegrationProviderAuthenticationError({
-        cause: err,
         endpoint: url,
-        status: err.response.status,
-        statusText: err.response,
+        status: reply.status,
+        statusText: `Received HTTP status ${reply.status} while fetching ${url}`,
       });
     }
+    return reply.data.data;
   }
 
   //there are two reasons we might need an orgToken - either we never got it, or it expired
