@@ -1,9 +1,12 @@
 import {
   createDirectRelationship,
+  createMappedRelationship,
   createIntegrationEntity,
+  generateRelationshipType,
   IntegrationStep,
   IntegrationStepExecutionContext,
   RelationshipClass,
+  RelationshipDirection,
   IntegrationMissingKeyError,
   assignTags,
 } from '@jupiterone/integration-sdk-core';
@@ -11,6 +14,8 @@ import {
 import { createAPIClient } from '../client';
 import { IntegrationConfig } from '../types';
 import { getVulnerabilityLink, getVulnerabilityNumber } from '../util';
+
+const ENTITY_TYPE_CVE_VULNERABILITY = 'cve';
 
 export async function fetchFindings({
   instance,
@@ -107,40 +112,32 @@ export async function fetchFindings({
 
     const vulnLink: string = getVulnerabilityLink(findingProps.description);
     if (!(vulnLink === 'none')) {
-      //we have detected a link to a CVE or CWE in the description, so let's make a Vulnerability object
+      //we have detected a link to a CVE or CWE in the description, so let's global map to a Vulnerability
       const vulnNumber = getVulnerabilityNumber(vulnLink);
-      const vulnerabilityEntity = await jobState.addEntity(
-        createIntegrationEntity({
-          entityData: {
-            source: {
-              name: vulnNumber,
-              link: vulnLink,
-            },
-            assign: {
-              _type: 'cobalt_vulnerability',
-              _class: 'Vulnerability',
-              _key: vulnNumber,
-              name: vulnNumber,
-              displayName: vulnNumber,
-              category: 'application',
-              webLink: vulnLink,
-              severity: 'unknown',
-              blocking: false,
-              open: true,
-              production: true,
-              public: true,
-            },
-          },
-        }),
-      );
+      const targetEntity = {
+        _class: 'Vulnerability',
+        _type: ENTITY_TYPE_CVE_VULNERABILITY,
+        _key: vulnNumber.toLowerCase(),
+        name: vulnNumber,
+        displayName: vulnNumber,
+        webLink: vulnLink,
+      };
+      const relationship = createMappedRelationship({
+        _class: RelationshipClass.IS,
+        _type: generateRelationshipType(
+          RelationshipClass.IS,
+          findingEntity._type,
+          ENTITY_TYPE_CVE_VULNERABILITY,
+        ),
+        _mapping: {
+          relationshipDirection: RelationshipDirection.FORWARD,
+          sourceEntityKey: findingEntity._key,
+          targetFilterKeys: [['_type', '_key']],
+          targetEntity,
+        },
+      });
 
-      await jobState.addRelationship(
-        createDirectRelationship({
-          _class: RelationshipClass.IS,
-          from: findingEntity,
-          to: vulnerabilityEntity,
-        }),
-      );
+      await jobState.addRelationship(relationship);
     }
   });
 }
@@ -156,12 +153,6 @@ export const findingSteps: IntegrationStep<IntegrationConfig>[] = [
         _class: 'Finding',
         partial: true,
       },
-      {
-        resourceName: 'Cobalt Vulnerability',
-        _type: 'cobalt_vulnerability',
-        _class: 'Vulnerability',
-        partial: true,
-      },
     ],
     relationships: [
       {
@@ -175,18 +166,6 @@ export const findingSteps: IntegrationStep<IntegrationConfig>[] = [
         _class: RelationshipClass.HAS,
         sourceType: 'cobalt_asset',
         targetType: 'cobalt_finding',
-      },
-      {
-        _type: 'cobalt_pentest_identified_vulnerability',
-        _class: RelationshipClass.IDENTIFIED,
-        sourceType: 'cobalt_pentest',
-        targetType: 'cobalt_vulnerability',
-      },
-      {
-        _type: 'cobalt_finding_is_vulnerability',
-        _class: RelationshipClass.IS,
-        sourceType: 'cobalt_finding',
-        targetType: 'cobalt_vulnerability',
       },
     ],
     dependsOn: ['fetch-pentests'],

@@ -75,31 +75,28 @@ https://github.com/JupiterOne/sdk/blob/master/docs/integrations/development.md
 
 The following entities are created:
 
-| Resources              | Entity `_type`         | Entity `_class` |
-| ---------------------- | ---------------------- | --------------- |
-| Cobalt                 | `cobalt_vendor`        | `Vendor`        |
-| Cobalt Account         | `cobalt_account`       | `Account`       |
-| Cobalt Asset           | `cobalt_asset`         | `Application`   |
-| Cobalt Finding         | `cobalt_finding`       | `Finding`       |
-| Cobalt Pentest         | `cobalt_pentest`       | `Assessment`    |
-| Cobalt Vulnerability   | `cobalt_vulnerability` | `Vulnerability` |
-| Cobalt pentest service | `cobalt_service`       | `Service`       |
+| Resources              | Entity `_type`   | Entity `_class` |
+| ---------------------- | ---------------- | --------------- |
+| Cobalt                 | `cobalt_vendor`  | `Vendor`        |
+| Cobalt Account         | `cobalt_account` | `Account`       |
+| Cobalt Asset           | `cobalt_asset`   | `Application`   |
+| Cobalt Finding         | `cobalt_finding` | `Finding`       |
+| Cobalt Pentest         | `cobalt_pentest` | `Assessment`    |
+| Cobalt pentest service | `cobalt_service` | `Service`       |
 
 ### Relationships
 
 The following relationships are created/mapped:
 
-| Source Entity `_type` | Relationship `_class` | Target Entity `_type`  |
-| --------------------- | --------------------- | ---------------------- |
-| `cobalt_account`      | **HAS**               | `cobalt_asset`         |
-| `cobalt_account`      | **HAS**               | `cobalt_service`       |
-| `cobalt_asset`        | **HAS**               | `cobalt_finding`       |
-| `cobalt_finding`      | **IS**                | `cobalt_vulnerability` |
-| `cobalt_pentest`      | **IDENTIFIED**        | `cobalt_finding`       |
-| `cobalt_pentest`      | **IDENTIFIED**        | `cobalt_vulnerability` |
-| `cobalt_service`      | **PERFORMED**         | `cobalt_pentest`       |
-| `cobalt_vendor`       | **PERFORMED**         | `cobalt_pentest`       |
-| `cobalt_vendor`       | **PROVIDES**          | `cobalt_service`       |
+| Source Entity `_type` | Relationship `_class` | Target Entity `_type` |
+| --------------------- | --------------------- | --------------------- |
+| `cobalt_account`      | **HAS**               | `cobalt_asset`        |
+| `cobalt_account`      | **HAS**               | `cobalt_service`      |
+| `cobalt_asset`        | **HAS**               | `cobalt_finding`      |
+| `cobalt_pentest`      | **IDENTIFIED**        | `cobalt_finding`      |
+| `cobalt_service`      | **PERFORMED**         | `cobalt_pentest`      |
+| `cobalt_vendor`       | **PERFORMED**         | `cobalt_pentest`      |
+| `cobalt_vendor`       | **PROVIDES**          | `cobalt_service`      |
 
 <!--
 ********************************************************************************
