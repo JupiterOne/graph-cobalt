@@ -49,7 +49,7 @@ export function webifyFromTitles(input): string {
   // /\s/ means spaces, so .replace(/\s/g,'-') means replace all spaces with dashes, g=globally
   // .replace(/-+/g,'-') means replaces 1+ dashes with a single dash
   // .replace(/#+/g, '') is to strip any hashtags
-  const returnString = input
+  const returnString: string = input
     .trim()
     .replace(/\s/g, '-')
     .replace(/-+/g, '-')

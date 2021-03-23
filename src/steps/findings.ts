@@ -5,6 +5,7 @@ import {
   IntegrationStepExecutionContext,
   RelationshipClass,
   IntegrationMissingKeyError,
+  assignTags,
 } from '@jupiterone/integration-sdk-core';
 
 import { createAPIClient } from '../client';
@@ -50,14 +51,13 @@ export async function fetchFindings({
             _type: 'cobalt_finding',
             _class: 'Finding',
             _key: findingProps.id,
-            tag: findingProps.tag,
+            cobaltHashtag: findingProps.tag,
             name: findingProps.title,
             displayName: findingProps.title,
             webLink: webLink,
             description: findingProps.description,
             category: 'Penetration Testing',
             typeCategory: findingProps.type_category,
-            labels: JSON.stringify(findingProps.labels, null, 2),
             impact: JSON.stringify(findingProps.impact, null, 2), //required to be a string in J1 Finding
             severity: findingProps.severity, //required property in J1 Finding
             numericSeverity: findingProps.impact * 2, //required property in J1 Finding, normalized
@@ -74,6 +74,14 @@ export async function fetchFindings({
         },
       }),
     );
+
+    if (findingProps.labels) {
+      const labelArray: string[] = [];
+      for (const someLabel in findingProps.labels) {
+        labelArray.push(JSON.stringify(someLabel));
+      } //because I don't have any data to determine if labels are strings or objects
+      assignTags(findingEntity, labelArray);
+    }
 
     await jobState.addRelationship(
       createDirectRelationship({
