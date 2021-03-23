@@ -20,7 +20,7 @@ export async function fetchAccountDetails({
 }: IntegrationStepExecutionContext<IntegrationConfig>) {
   const apiClient = createAPIClient(instance.config);
 
-  await apiClient.addAccount(async (org) => {
+  await apiClient.getAccount(async (org) => {
     delete org.resource.token;
     const orgProps = org.resource;
     const name: string = `Cobalt - ${instance.name}`;

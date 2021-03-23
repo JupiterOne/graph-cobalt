@@ -433,7 +433,7 @@ Test of non English chars
       ],
       "_type": "cobalt_finding",
       "assetId": "as_rPjSpXj",
-      "category": "Penetration Testing",
+      "category": "Business Logic",
       "cobaltHashtag": "#PT5734_2",
       "createdOn": undefined,
       "description": "Most security problems are weaknesses in an application that result from a broken or missing security control (authentication, access control, input validation, etc...). By contrast, business logic vulnerabilities are ways of using the legitimate processing flow of an application in a way that results in a negative consequence to the organization.
@@ -453,7 +453,6 @@ Test of non English chars
       "targets": Array [
         "cobalt.io",
       ],
-      "typeCategory": "Business Logic",
       "webLink": "https://app.cobalt.io/test-org-api/test-asset-1-february-2021-pt5734/findings/2",
     },
     Object {
@@ -496,7 +495,7 @@ Stored attacks are those where the injected script is permanently stored on the 
       ],
       "_type": "cobalt_finding",
       "assetId": "as_rPjSpXj",
-      "category": "Penetration Testing",
+      "category": "Validation, Sanitization and Encoding",
       "cobaltHashtag": "#PT5734_1",
       "createdOn": undefined,
       "description": "Cross-Site Scripting (XSS) attacks are a type of injection, in which malicious scripts are injected into otherwise benign and trusted websites. XSS attacks occur when an attacker uses a web application to send malicious code, generally in the form of a browser side script, to a different end user. Flaws that allow these attacks to succeed are quite widespread and occur anywhere a web application uses input from a user within the output it generates without validating or encoding it.
@@ -521,7 +520,6 @@ Stored attacks are those where the injected script is permanently stored on the 
       "targets": Array [
         "Cobalt.io",
       ],
-      "typeCategory": "Validation, Sanitization and Encoding",
       "webLink": "https://app.cobalt.io/test-org-api/test-asset-1-february-2021-pt5734/findings/1",
     },
   ],

@@ -56,8 +56,7 @@ export async function fetchFindings({
             displayName: findingProps.title,
             webLink: webLink,
             description: findingProps.description,
-            category: 'Penetration Testing',
-            typeCategory: findingProps.type_category,
+            category: findingProps.type_category,
             impact: JSON.stringify(findingProps.impact, null, 2), //required to be a string in J1 Finding
             severity: findingProps.severity, //required property in J1 Finding
             numericSeverity: findingProps.impact * 2, //required property in J1 Finding, normalized

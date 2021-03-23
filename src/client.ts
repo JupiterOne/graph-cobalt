@@ -96,7 +96,7 @@ export class APIClient {
    *
    * @param iteratee receives the raw account info to produce entities/relationships
    */
-  public async addAccount(
+  public async getAccount(
     iteratee: ResourceIteratee<CobaltOrg>,
   ): Promise<void> {
     const orgs: CobaltOrg[] = await this.contactAPI(
