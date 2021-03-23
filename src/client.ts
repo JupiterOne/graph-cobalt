@@ -1,4 +1,4 @@
-import http from 'http';
+import axios, { AxiosInstance } from 'axios';
 
 import { IntegrationProviderAuthenticationError } from '@jupiterone/integration-sdk-core';
 
@@ -6,140 +6,214 @@ import { IntegrationConfig } from './types';
 
 export type ResourceIteratee<T> = (each: T) => Promise<void> | void;
 
-// Providers often supply types with their API libraries.
-
-type AcmeUser = {
-  id: string;
-  name: string;
+type CobaltOrg = {
+  resource: {
+    id: string;
+    name: string;
+    token?: string;
+  };
 };
 
-type AcmeGroup = {
-  id: string;
-  name: string;
-  users?: Pick<AcmeUser, 'id'>[];
+type CobaltAsset = {
+  resource: {
+    id: string;
+    title: string;
+    description: string;
+    asset_type: string;
+    attachments?: object[]; // { token: string, download_url: string }, refers to documents about asset
+  };
 };
 
-// Those can be useful to a degree, but often they're just full of optional
-// values. Understanding the response data may be more reliably accomplished by
-// reviewing the API response recordings produced by testing the wrapper client
-// (below). However, when there are no types provided, it is necessary to define
-// opaque types for each resource, to communicate the records that are expected
-// to come from an endpoint and are provided to iterating functions.
+type CobaltPentest = {
+  resource: {
+    id: string;
+    title: string;
+    objectives: string;
+    state: string; //enum 'new', 'in_review', 'live', 'paused', 'closed', 'cancelled', 'planned', 'remediation'
+    tag: string;
+    asset_id: string;
+    platform_tags: string[];
+    methodology: string;
+    targets: string[];
+    start_date: string;
+    end_date: string;
+  };
+};
 
-/*
-import { Opaque } from 'type-fest';
-export type AcmeUser = Opaque<any, 'AcmeUser'>;
-export type AcmeGroup = Opaque<any, 'AcmeGroup'>;
-*/
+type CobaltFinding = {
+  resource: {
+    id: string;
+    tag: string;
+    title: string;
+    description: string;
+    type_category: string;
+    labels: object[]; // { name: string }
+    impact: number; //range 1 to 5
+    likelihood: number; // range 1 to 5
+    severity: string; //enum low,medium,high
+    state: string; //enum 'created', 'pending_fix', 'ready_for_re_test', 'accepted_risk', 'fixed', 'carried_over'
+    affected_targets: string[];
+    proof_of_concept: string;
+    suggested_fix: string;
+    prerequisites?: string;
+    pentest_id: string;
+    asset_id?: string;
+    log?: object[]; // { action: string, timestamp: string}, values for action per 'state' field above
+  };
+};
 
 /**
  * An APIClient maintains authentication state and provides an interface to
  * third party data APIs.
- *
- * It is recommended that integrations wrap provider data APIs to provide a
- * place to handle error responses and implement common patterns for iterating
- * resources.
  */
 export class APIClient {
+  orgToken: string;
   constructor(readonly config: IntegrationConfig) {}
 
+  getClient(): AxiosInstance {
+    const client = axios.create({
+      headers: {
+        get: {
+          client: 'JupiterOne-Cobalt Integration client',
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${this.config.apiKeyAuth}`,
+          'X-Org-Token': this.orgToken || '', //can't send undefined in HTTP
+        },
+      },
+    });
+    return client;
+  }
+
   public async verifyAuthentication(): Promise<void> {
-    // TODO make the most light-weight request possible to validate
+    // the most light-weight request possible to validate
     // authentication works with the provided credentials, throw an err if
     // authentication fails
-    const request = new Promise((resolve, reject) => {
-      http.get(
-        {
-          hostname: 'localhost',
-          port: 443,
-          path: '/api/v1/some/endpoint?limit=1',
-          agent: false,
-          timeout: 10,
-        },
-        (res) => {
-          if (res.statusCode !== 200) {
-            reject(new Error('Provider authentication failed'));
-          } else {
-            resolve();
-          }
-        },
-      );
-    });
+    return await this.contactAPI('https://api.cobalt.io/orgs');
+  }
 
+  /**
+   * Add account info.
+   *
+   * @param iteratee receives the raw account info to produce entities/relationships
+   */
+  public async getAccount(
+    iteratee: ResourceIteratee<CobaltOrg>,
+  ): Promise<void> {
+    const orgs: CobaltOrg[] = await this.contactAPI(
+      'https://api.cobalt.io/orgs',
+    );
+    await iteratee(orgs[0]);
+  }
+
+  /**
+   * Iterates each finding resource in the provider.
+   *
+   * @param iteratee receives each resource to produce entities/relationships
+   */
+  public async iterateFindings(
+    iteratee: ResourceIteratee<CobaltFinding>,
+  ): Promise<void> {
+    const findings: CobaltFinding[] = await this.contactAPI(
+      'https://api.cobalt.io/findings',
+    );
+
+    for (const finding of findings) {
+      await iteratee(finding);
+    }
+  }
+
+  /**
+   * Iterates each pentest (penetration test) resource in the provider.
+   *
+   * @param iteratee receives each resource to produce entities/relationships
+   */
+  public async iteratePentests(
+    iteratee: ResourceIteratee<CobaltPentest>,
+  ): Promise<void> {
+    const pentests: CobaltPentest[] = await this.contactAPI(
+      'https://api.cobalt.io/pentests',
+    );
+
+    for (const pentest of pentests) {
+      await iteratee(pentest);
+    }
+  }
+
+  /**
+   * Iterates each pentest (penetration test) resource in the provider.
+   *
+   * @param iteratee receives each resource to produce entities/relationships
+   */
+  public async iterateAssets(
+    iteratee: ResourceIteratee<CobaltAsset>,
+  ): Promise<void> {
+    const assets: CobaltAsset[] = await this.contactAPI(
+      'https://api.cobalt.io/assets',
+    );
+
+    for (const asset of assets) {
+      await iteratee(asset);
+    }
+  }
+
+  public async contactAPI(url, params?) {
+    let reply;
+    let replyErrorDetected = false;
+    if (!this.orgToken) {
+      await this.updateOrgToken();
+    }
     try {
-      await request;
+      reply = await this.getClient().get(url, params);
+    } catch (err) {
+      replyErrorDetected = true;
+    }
+    if (replyErrorDetected || reply.status !== 200) {
+      //maybe token expired
+      try {
+        await this.updateOrgToken();
+        reply = await this.getClient().get(url, params);
+      } catch (err) {
+        //something is really failing
+        throw new IntegrationProviderAuthenticationError({
+          cause: err,
+          endpoint: url,
+          status: err.response.status,
+          statusText: err.response,
+        });
+      }
+    }
+    if (reply.status !== 200) {
+      //we're getting a reply, but it's not a useful one
+      throw new IntegrationProviderAuthenticationError({
+        endpoint: url,
+        status: reply.status,
+        statusText: `Received HTTP status ${reply.status} while fetching ${url}`,
+      });
+    }
+    return reply.data.data;
+  }
+
+  //there are two reasons we might need an orgToken - either we never got it, or it expired
+  public async updateOrgToken() {
+    try {
+      const tokenSearch = await this.getClient().get(
+        'https://api.cobalt.io/orgs',
+      );
+      if (tokenSearch.status != 200) {
+        throw new IntegrationProviderAuthenticationError({
+          endpoint: 'https://api.cobalt.io/orgs',
+          status: tokenSearch.status,
+          statusText: `Received HTTP status ${tokenSearch.status} while trying to update token. Please check API_KEY_AUTH.`,
+        });
+      }
+      this.orgToken = tokenSearch.data.data[0].resource.token;
     } catch (err) {
       throw new IntegrationProviderAuthenticationError({
         cause: err,
-        endpoint: 'https://localhost/api/v1/some/endpoint?limit=1',
-        status: err.status,
-        statusText: err.statusText,
+        endpoint: `https://api.cobalt.io/orgs`,
+        status: err.response.status,
+        statusText: err.response,
       });
-    }
-  }
-
-  /**
-   * Iterates each user resource in the provider.
-   *
-   * @param iteratee receives each resource to produce entities/relationships
-   */
-  public async iterateUsers(
-    iteratee: ResourceIteratee<AcmeUser>,
-  ): Promise<void> {
-    // TODO paginate an endpoint, invoke the iteratee with each record in the
-    // page
-    //
-    // The provider API will hopefully support pagination. Functions like this
-    // should maintain pagination state, and for each page, for each record in
-    // the page, invoke the `ResourceIteratee`. This will encourage a pattern
-    // where each resource is processed and dropped from memory.
-
-    const users: AcmeUser[] = [
-      {
-        id: 'acme-user-1',
-        name: 'User One',
-      },
-      {
-        id: 'acme-user-2',
-        name: 'User Two',
-      },
-    ];
-
-    for (const user of users) {
-      await iteratee(user);
-    }
-  }
-
-  /**
-   * Iterates each group resource in the provider.
-   *
-   * @param iteratee receives each resource to produce entities/relationships
-   */
-  public async iterateGroups(
-    iteratee: ResourceIteratee<AcmeGroup>,
-  ): Promise<void> {
-    // TODO paginate an endpoint, invoke the iteratee with each record in the
-    // page
-    //
-    // The provider API will hopefully support pagination. Functions like this
-    // should maintain pagination state, and for each page, for each record in
-    // the page, invoke the `ResourceIteratee`. This will encourage a pattern
-    // where each resource is processed and dropped from memory.
-
-    const groups: AcmeGroup[] = [
-      {
-        id: 'acme-group-1',
-        name: 'Group One',
-        users: [
-          {
-            id: 'acme-user-1',
-          },
-        ],
-      },
-    ];
-
-    for (const group of groups) {
-      await iteratee(group);
     }
   }
 }
