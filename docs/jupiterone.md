@@ -30,10 +30,9 @@ If you need help with this integration, please contact
 
 1. Sign in to your [Cobalt account](https://app.cobalt.io/users/sign_in).
 2. Under your profile (top right corner of page), go to [API
-   Token].(https://app.cobalt.io/settings/api-token)
-3. Press Generate Token
-4. Copy the token locally, because you won't be able to copy it after you leave
-   this page.
+   Token](https://app.cobalt.io/settings/api-token).
+3. Press **Generate Token**.
+4. Copy the token (you won't be able to copy it after you leave this page).
 
 ### In JupiterOne
 
