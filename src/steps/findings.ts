@@ -26,7 +26,7 @@ export async function fetchFindings({
   await apiClient.iterateFindings(async (finding) => {
     const findingProps = finding.resource;
     let openBoolean: boolean;
-    findingProps.state === 'fixed'
+    findingProps.state === 'fixed' || findingProps.state === 'wont_fix'
       ? (openBoolean = false)
       : (openBoolean = true);
 
@@ -67,7 +67,7 @@ export async function fetchFindings({
             numericSeverity: findingProps.impact * 2, //required property in J1 Finding, normalized
             likelihood: findingProps.likelihood,
             state: findingProps.state,
-            open: openBoolean, //required property in J1 Finding
+            open: openBoolean, //required property in J1 Finding, set false if state='fixed' or 'wont_fix'
             targets: findingProps.affected_targets, //.targets has a global mapping in J1
             proofOfConcept: findingProps.proof_of_concept,
             suggestedFix: findingProps.suggested_fix,
