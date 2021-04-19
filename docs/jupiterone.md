@@ -29,8 +29,8 @@ If you need help with this integration, please contact
 ### In Cobalt
 
 1. Sign in to your [Cobalt account](https://app.cobalt.io/users/sign_in).
-2. Under your profile (top right corner of page), go to [API
-   Token](https://app.cobalt.io/settings/api-token).
+2. Under your profile (top right corner of page), go to
+   [API Token](https://app.cobalt.io/settings/api-token).
 3. Press **Generate Token**.
 4. Copy the token (you won't be able to copy it after you leave this page).
 
@@ -92,6 +92,7 @@ The following relationships are created/mapped:
 | `cobalt_account`      | **HAS**               | `cobalt_asset`        |
 | `cobalt_account`      | **HAS**               | `cobalt_service`      |
 | `cobalt_asset`        | **HAS**               | `cobalt_finding`      |
+| `cobalt_finding`      | **IS**                | `cve`                 |
 | `cobalt_pentest`      | **IDENTIFIED**        | `cobalt_finding`      |
 | `cobalt_service`      | **PERFORMED**         | `cobalt_pentest`      |
 | `cobalt_vendor`       | **PERFORMED**         | `cobalt_pentest`      |

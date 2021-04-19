@@ -63,7 +63,7 @@ export async function fetchFindings({
             description: findingProps.description,
             category: findingProps.type_category,
             impact: JSON.stringify(findingProps.impact, null, 2), //required to be a string in J1 Finding
-            severity: findingProps.severity, //required property in J1 Finding
+            severity: JSON.stringify(findingProps.severity), //required property in J1 Finding
             numericSeverity: findingProps.impact * 2, //required property in J1 Finding, normalized
             likelihood: findingProps.likelihood,
             state: findingProps.state,
@@ -166,6 +166,12 @@ export const findingSteps: IntegrationStep<IntegrationConfig>[] = [
         _class: RelationshipClass.HAS,
         sourceType: 'cobalt_asset',
         targetType: 'cobalt_finding',
+      },
+      {
+        _type: 'cobalt_finding_is_cve',
+        _class: RelationshipClass.IS,
+        sourceType: 'cobalt_finding',
+        targetType: 'cve',
       },
     ],
     dependsOn: ['fetch-pentests'],

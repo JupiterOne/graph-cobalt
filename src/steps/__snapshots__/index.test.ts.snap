@@ -447,7 +447,7 @@ Test of non English chars
       "pentestId": "pt_gm4lmL1",
       "prerequisites": undefined,
       "proofOfConcept": null,
-      "severity": "low",
+      "severity": "\\"low\\"",
       "state": "need_fix",
       "suggestedFix": "something",
       "targets": Array [
@@ -514,7 +514,7 @@ Stored attacks are those where the injected script is permanently stored on the 
       "pentestId": "pt_gm4lmL1",
       "prerequisites": undefined,
       "proofOfConcept": null,
-      "severity": "high",
+      "severity": "\\"high\\"",
       "state": "need_fix",
       "suggestedFix": "1. Always treat all user input as untrusted data. 2. Never insert untrusted data except in allowed locations. 3. Always input or output-encode all data coming into or out of the application. 4. Always whitelist allowed characters and seldom use blacklisting of characters except in certain use cases. 5. Always use a well-known and security encoding API for input and output encoding such as the \`OWASP ESAPI\`. 6. Never try to write input and output encoders unless absolutely necessary. Chances are that someone has already written a good one. 7. Never use the DOM function \`innerHtml\` and instead use the functions \`innerText\` and \`textContent\` to prevent against DOM-based XSS. 8. As a best practice, consider using the \`HTTPOnly\` flag on cookies that are session tokens or sensitive tokens. 9. As a best practice, consider implementing \`Content Security Policy\` to protect against XSS and other injection type attacks. 10. As a best practice, consider using an auto-escaping templating system. 11. As a best practice, consider using the \`X-XSS-Protection\` response header.",
       "targets": Array [
