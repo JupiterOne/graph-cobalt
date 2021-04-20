@@ -25,10 +25,6 @@ export async function fetchFindings({
 
   await apiClient.iterateFindings(async (finding) => {
     const findingProps = finding.resource;
-    let openBoolean: boolean;
-    findingProps.state === 'fixed'
-      ? (openBoolean = false)
-      : (openBoolean = true);
 
     // to derive the Finding webLink, we'll need pentest.weblink
     //can't have a Finding without an Assessment (pentest)
@@ -63,11 +59,13 @@ export async function fetchFindings({
             description: findingProps.description,
             category: findingProps.type_category,
             impact: JSON.stringify(findingProps.impact, null, 2), //required to be a string in J1 Finding
-            severity: findingProps.severity, //required property in J1 Finding
+            severity: findingProps.severity || '', //required property in J1 Finding
             numericSeverity: findingProps.impact * 2, //required property in J1 Finding, normalized
             likelihood: findingProps.likelihood,
             state: findingProps.state,
-            open: openBoolean, //required property in J1 Finding
+            open:
+              findingProps.state !== 'fixed' &&
+              findingProps.state !== 'wont_fix',
             targets: findingProps.affected_targets, //.targets has a global mapping in J1
             proofOfConcept: findingProps.proof_of_concept,
             suggestedFix: findingProps.suggested_fix,
@@ -166,6 +164,12 @@ export const findingSteps: IntegrationStep<IntegrationConfig>[] = [
         _class: RelationshipClass.HAS,
         sourceType: 'cobalt_asset',
         targetType: 'cobalt_finding',
+      },
+      {
+        _type: 'cobalt_finding_is_cve',
+        _class: RelationshipClass.IS,
+        sourceType: 'cobalt_finding',
+        targetType: 'cve',
       },
     ],
     dependsOn: ['fetch-pentests'],
