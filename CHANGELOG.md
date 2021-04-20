@@ -7,3 +7,21 @@ and this project adheres to
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## 1.0.1
+
+### Added
+
+- Status `wont_fix` will set Finding property `open` to false (as `fixed`
+  already did).
+
+### Changed
+
+- Updated to JupiterOne SDK version 6.0.0
+
+## 1.0.0
+
+### Added
+
+- First version of the Cobalt integration, with Pentests, Findings, Users, and
+  Assets
