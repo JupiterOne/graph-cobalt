@@ -34,15 +34,6 @@ export async function fetchFindings({
         `Expected Assessment with key to exist (key=${findingProps.pentest_id}) as part of Finding (key=${findingProps.id})`,
       );
     }
-    // Example weblink about calculations below:
-    // https://app.cobalt.io/test-org-api/test-asset-1-february-2021-pt5734/findings/1
-    const orgWebLink: string = `${assessmentEntity.webLink}`;
-    const lenToChop = 'brief'.length; //cut off the word brief from assessment (pentest) link
-    const findingNum = findingProps.tag.split('_')[1]; //example of finding.tag is #PT5734_1
-    const webLink = `${orgWebLink.substring(
-      0,
-      orgWebLink.length - lenToChop,
-    )}findings/${findingNum}`;
 
     const findingEntity = await jobState.addEntity(
       createIntegrationEntity({
@@ -55,7 +46,7 @@ export async function fetchFindings({
             cobaltHashtag: findingProps.tag,
             name: findingProps.title,
             displayName: findingProps.title,
-            webLink: webLink,
+            webLink: finding.links?.ui?.url,
             description: findingProps.description,
             category: findingProps.type_category,
             impact: JSON.stringify(findingProps.impact, null, 2), //required to be a string in J1 Finding
