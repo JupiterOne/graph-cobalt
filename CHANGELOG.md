@@ -8,6 +8,12 @@ and this project adheres to
 
 ## [Unreleased]
 
+## 1.1.0 - 2021-07-06
+
+### Changed
+
+- Changed the weblink logic to use `links.ui.uri`, returned from Cobalt API.
+
 ## 1.0.1
 
 ### Added

@@ -12,17 +12,24 @@ Object {
         Object {
           "name": "default",
           "rawData": Object {
+            "links": Object {
+              "ui": Object {
+                "url": "https://app.cobalt.io/test-org-api",
+              },
+            },
             "resource": Object {
               "id": "3119",
               "name": "TEST ORG - API",
+              "token": "[REDACTED]",
             },
           },
         },
       ],
       "_type": "cobalt_account",
       "createdOn": undefined,
-      "displayName": "Cobalt - Local Integration",
-      "name": "Cobalt - Local Integration",
+      "displayName": "TEST ORG - API",
+      "id": "3119",
+      "name": "TEST ORG - API",
       "webLink": "https://app.cobalt.io/test-org-api",
     },
     Object {
@@ -396,7 +403,7 @@ Test of non English chars
       "targets": "[
   \\"Cobalt.io\\"
 ]",
-      "webLink": "https://app.cobalt.io/test-org-api/test-asset-1-february-2021-pt5734/brief",
+      "webLink": undefined,
     },
     Object {
       "_class": Array [
@@ -453,7 +460,7 @@ Test of non English chars
       "targets": Array [
         "cobalt.io",
       ],
-      "webLink": "https://app.cobalt.io/test-org-api/test-asset-1-february-2021-pt5734/findings/2",
+      "webLink": undefined,
     },
     Object {
       "_class": Array [
@@ -520,7 +527,7 @@ Stored attacks are those where the injected script is permanently stored on the 
       "targets": Array [
         "Cobalt.io",
       ],
-      "webLink": "https://app.cobalt.io/test-org-api/test-asset-1-february-2021-pt5734/findings/1",
+      "webLink": undefined,
     },
   ],
   "collectedRelationships": Array [

@@ -6,15 +6,23 @@ import { IntegrationConfig } from './types';
 
 export type ResourceIteratee<T> = (each: T) => Promise<void> | void;
 
-type CobaltOrg = {
+interface LinkedApiResponse {
+  links?: {
+    ui?: {
+      url?: string;
+    };
+  };
+}
+
+interface CobaltOrg extends LinkedApiResponse {
   resource: {
     id: string;
     name: string;
     token?: string;
   };
-};
+}
 
-type CobaltAsset = {
+interface CobaltAsset {
   resource: {
     id: string;
     title: string;
@@ -22,9 +30,9 @@ type CobaltAsset = {
     asset_type: string;
     attachments?: object[]; // { token: string, download_url: string }, refers to documents about asset
   };
-};
+}
 
-type CobaltPentest = {
+interface CobaltPentest extends LinkedApiResponse {
   resource: {
     id: string;
     title: string;
@@ -38,9 +46,9 @@ type CobaltPentest = {
     start_date: string;
     end_date: string;
   };
-};
+}
 
-type CobaltFinding = {
+interface CobaltFinding extends LinkedApiResponse {
   resource: {
     id: string;
     tag: string;
@@ -60,7 +68,7 @@ type CobaltFinding = {
     asset_id?: string;
     log?: object[]; // { action: string, timestamp: string}, values for action per 'state' field above
   };
-};
+}
 
 /**
  * An APIClient maintains authentication state and provides an interface to
