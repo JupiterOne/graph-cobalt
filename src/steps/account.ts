@@ -8,7 +8,6 @@ import {
 
 import { IntegrationConfig } from '../types';
 import { createAPIClient } from '../client';
-import { webifyFromTitles } from '../util';
 
 export const DATA_ACCOUNT_ENTITY = 'DATA_ACCOUNT_ENTITY';
 export const VENDOR_ENTITY_KEY = 'cobalt-vendor';
@@ -21,12 +20,7 @@ export async function fetchAccountDetails({
   const apiClient = createAPIClient(instance.config);
 
   await apiClient.getAccount(async (org) => {
-    delete org.resource.token;
-    const orgProps = org.resource;
-    const name: string = `Cobalt - ${instance.name}`;
-    const webLink: string = `https://app.cobalt.io/${webifyFromTitles(
-      orgProps.name,
-    )}`;
+    org.resource.token = '[REDACTED]';
     const accountEntity = await jobState.addEntity(
       createIntegrationEntity({
         entityData: {
@@ -35,9 +29,10 @@ export async function fetchAccountDetails({
             _key: `cobalt-account:${instance.id}`,
             _type: 'cobalt_account',
             _class: 'Account',
-            name: name,
-            displayName: name,
-            webLink: webLink,
+            name: org.resource.name,
+            displayName: org.resource.name,
+            id: org.resource.id,
+            webLink: org.links?.ui?.url,
           },
         },
       }),

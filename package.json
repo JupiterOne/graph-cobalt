@@ -1,6 +1,6 @@
 {
   "name": "@jupiterone/graph-cobalt",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "A graph conversion tool for https://cobalt.io/",
   "license": "MPL-2.0",
   "main": "dist/index.js",
