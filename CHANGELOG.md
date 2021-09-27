@@ -8,6 +8,12 @@ and this project adheres to
 
 ## [Unreleased]
 
+## [1.2.0] - 2021-09-27
+
+### Changed
+
+- Update build scripts to match integration template
+
 ## [1.1.1] - 2021-08-30
 
 ### Changed
