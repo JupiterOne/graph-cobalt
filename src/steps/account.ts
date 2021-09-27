@@ -66,6 +66,7 @@ export async function fetchAccountDetails({
             name: 'Cobalt pentest service',
             displayName: 'Cobalt pentest service',
             category: ['security'],
+            function: ['PenTest'],
           },
         },
       }),

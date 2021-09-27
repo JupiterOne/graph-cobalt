@@ -10,6 +10,18 @@ and this project adheres to
 
 ## [1.2.0] - 2021-09-27
 
+### Added
+
+- New properties added to resources:
+
+  | Entity           | Properties |
+  | ---------------- | ---------- |
+  | `cobalt_service` | `function` |
+
+  - The `function` property is standard to the `Service` entity class exposed by
+    the JupiterOne data model and is used to describe the type of service (e.g.
+    `DAST`, `SAST`)
+
 ### Changed
 
 - Update build scripts to match integration template
