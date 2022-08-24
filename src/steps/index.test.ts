@@ -1,4 +1,7 @@
-import { createMockStepExecutionContext, Recording } from '@jupiterone/integration-sdk-testing';
+import {
+  createMockStepExecutionContext,
+  Recording,
+} from '@jupiterone/integration-sdk-testing';
 import { setupCobaltRecording } from '../../test/recording';
 import { IntegrationConfig } from '../types';
 import { fetchAccountDetails } from './account';
@@ -10,23 +13,21 @@ import { getVulnerabilityLink, getVulnerabilityNumber } from '../util';
 const DEFAULT_API_KEY = 'dummy-api-key';
 
 const integrationConfig: IntegrationConfig = {
-  apiKeyAuth:
-    process.env.API_KEY_AUTH || DEFAULT_API_KEY,
+  apiKeyAuth: process.env.API_KEY_AUTH || DEFAULT_API_KEY,
 };
 
 jest.setTimeout(1000 * 60 * 1);
-let recording: Recording;     
+let recording: Recording;
 
 afterEach(async () => {
   await recording.stop();
-});  
+});
 
 test('should collect data', async () => {
-
-  recording = setupCobaltRecording({ 
-    directory: __dirname, 
-    name: 'steps', 
-    redactedRequestHeaders: [ 'Authorization', 'X-Org-Token' ],
+  recording = setupCobaltRecording({
+    directory: __dirname,
+    name: 'steps',
+    redactedRequestHeaders: ['Authorization', 'X-Org-Token'],
   });
 
   const context = createMockStepExecutionContext<IntegrationConfig>({
