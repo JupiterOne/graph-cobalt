@@ -8,6 +8,13 @@ and this project adheres to
 
 ## [Unreleased]
 
+## [1.3.0] - 2023-04-17
+
+### Changed
+
+- Updates `startDate` and `endDate` to `startedOn` and `endedOn` and property
+  parses the date string.
+
 ## [1.2.0] - 2021-09-27
 
 ### Added
