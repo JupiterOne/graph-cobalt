@@ -8,6 +8,12 @@ and this project adheres to
 
 ## [Unreleased]
 
+## [1.4.0] - 2023-04-18
+
+### Changed
+
+- renamed `endedOn` property to `completedOn` in accordance with the data-model
+
 ## [1.3.0] - 2023-04-17
 
 ### Changed
