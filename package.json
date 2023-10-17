@@ -2,6 +2,10 @@
   "name": "@jupiterone/graph-cobalt",
   "version": "1.4.0",
   "description": "A graph conversion tool for https://cobalt.io/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JupiterOne/graph-cobalt"
+  },
   "license": "MPL-2.0",
   "main": "src/index.js",
   "types": "src/index.d.ts",
